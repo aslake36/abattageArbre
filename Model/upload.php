@@ -60,11 +60,11 @@ function convertToJson($parsedFile){
     // lien : https://golux.lausanne.ch/goeland/affaire2/specialisation/t274/genereate_png_position_arbres.php?npixwidth=300&npixheight=300&symbsize=8&strjson=
     // Ex strjson : [{"type":"abattage","coordx":"539346.1","coordy":"152831.7"},{"type":"elagage","coordx":"539331.6","coordy":"152806.0"}]
     // line 22 to 111 -> Arbres
-    $strJson = "https://golux.lausanne.ch/goeland/affaire2/specialisation/t274/genereate_png_position_arbres.php?npixwidth=300&npixheight=300&symbsize=8&strjson=[";
+    $strJson = "";
     foreach ($parsedFile as $item) {
-        $strJson .= '{"type":"' . $item[6] . '",';
-        $strJson .= '"coordx":"' . str_replace(',','.',$item[0]) . '",';
-        $strJson .= '"coordy":"' . str_replace(',','.',$item[1]) . '"},';
+        $strJson .= "{%22type%22:%22" . $item[6] . "%22,";
+        $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[0]) . "%22,";
+        $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[1]) . "%22},";
     }
     return $strJson;
 }

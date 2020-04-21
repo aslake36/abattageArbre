@@ -19,13 +19,6 @@
 <div class="container">
     <hr>
 </div>
-<br>
-<div class="footer">
-    <div class="container">
-        <h3 class="text-center"> Boutton pour tout supprimer </h3>
-    </div>
-    <br>
-</div>
 
 
 <script src="Views/js/jQuery.js"></script>
