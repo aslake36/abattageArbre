@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * We store the file in our server
+ * @return mixed -> fileName
+ */
 function dlFile(){
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['file']['tmp_name'];
@@ -32,6 +36,11 @@ function dlFile(){
     }
 }
 
+/**
+ * We extract data that concerns trees
+ * @param $fileName -> file name
+ * @return array -> Only trees
+ */
 function getTrees($fileName){
     $result = [];
     $trees = [];
@@ -56,15 +65,66 @@ function getTrees($fileName){
     return $trees;
 }
 
+/**
+ * @param $parsedFile
+ * @return string ->
+ */
 function convertToJson($parsedFile){
     // lien : https://golux.lausanne.ch/goeland/affaire2/specialisation/t274/genereate_png_position_arbres.php?npixwidth=300&npixheight=300&symbsize=8&strjson=
     // Ex strjson : [{"type":"abattage","coordx":"539346.1","coordy":"152831.7"},{"type":"elagage","coordx":"539331.6","coordy":"152806.0"}]
     // line 22 to 111 -> Arbres
     $strJson = "";
+    var_dump($parsedFile);
     foreach ($parsedFile as $item) {
         $strJson .= "{%22type%22:%22" . $item[6] . "%22,";
         $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[0]) . "%22,";
         $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[1]) . "%22},";
+        if (isset($item[15])){
+            $strJson .= "{%22type%22:%22" . $item[15] . "%22,";
+            $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[9]) . "%22,";
+            $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[10]) . "%22},";
+            if (isset($item[24])){
+                $strJson .= "{%22type%22:%22" . $item[24] . "%22,";
+                $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[18]) . "%22,";
+                $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[19]) . "%22},";
+                if (isset($item[33])){
+                    $strJson .= "{%22type%22:%22" . $item[33] . "%22,";
+                    $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[27]) . "%22,";
+                    $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[28]) . "%22},";
+                    if (isset($item[42])){
+                        $strJson .= "{%22type%22:%22" . $item[42] . "%22,";
+                        $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[36]) . "%22,";
+                        $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[37]) . "%22},";
+                        if (isset($item[51])){
+                            $strJson .= "{%22type%22:%22" . $item[51] . "%22,";
+                            $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[45]) . "%22,";
+                            $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[46]) . "%22},";
+                            if (isset($item[60])){
+                                $strJson .= "{%22type%22:%22" . $item[60] . "%22,";
+                                $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[54]) . "%22,";
+                                $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[55]) . "%22},";
+                                if (isset($item[69])){
+                                    $strJson .= "{%22type%22:%22" . $item[69] . "%22,";
+                                    $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[63]) . "%22,";
+                                    $strJson .= "%22coordy%22:%22" . str_replace(',','.',$item[64]) . "%22},";
+                                    if (isset($item[78])) {
+                                        $strJson .= "{%22type%22:%22" . $item[78] . "%22,";
+                                        $strJson .= "%22coordx%22:%22" . str_replace(',', '.', $item[72]) . "%22,";
+                                        $strJson .= "%22coordy%22:%22" . str_replace(',', '.', $item[73]) . "%22},";
+                                        if (isset($item[87])) {
+                                            $strJson .= "{%22type%22:%22" . $item[87] . "%22,";
+                                            $strJson .= "%22coordx%22:%22" . str_replace(',', '.', $item[81]) . "%22,";
+                                            $strJson .= "%22coordy%22:%22" . str_replace(',', '.', $item[82]) . "%22},";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+    $strJson = substr($strJson, 0, -1);
     return $strJson;
 }
