@@ -11,8 +11,9 @@ function home(){
 
 function toJson(){
     $file = dlFile();
-    $parsedFile = parseFile($file);
-    convertToJson($parsedFile);
+    $parsedFile = getTrees($file);
+    $lien = convertToJson($parsedFile);
+    require "Views/result.php";
 }
 
 
