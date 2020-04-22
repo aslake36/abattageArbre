@@ -18,6 +18,11 @@ $title="Resultat";
                     https://golux.lausanne.ch/goeland/affaire2/specialisation/t274/genereate_png_position_arbres.php?npixwidth=300&npixheight=300&symbsize=8&strjson=[<?= str_replace("%22", '"', $link) ?>]
                 </span>
             </div>
+            <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger">
+                <?= $_GET['error'] ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 <?php

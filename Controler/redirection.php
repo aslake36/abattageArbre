@@ -1,6 +1,8 @@
 <?php
-
+require_once 'Model/File.php';
 require_once "Model/upload.php";
+
+use master\File;
 
 
 function home(){
@@ -10,6 +12,7 @@ function home(){
 
 
 function toJson(){
+    $file = new File($_FILES['file']);
     $file = dlFile();
     $parsedFile = getTrees($file);
     $_GET['action'] = 'result';

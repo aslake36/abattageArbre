@@ -74,7 +74,6 @@ function convertToJson($parsedFile){
     // Ex strjson : [{"type":"abattage","coordx":"539346.1","coordy":"152831.7"},{"type":"elagage","coordx":"539331.6","coordy":"152806.0"}]
     // line 22 to 111 -> Arbres
     $strJson = "";
-    var_dump($parsedFile);
     foreach ($parsedFile as $item) {
         $strJson .= "{%22type%22:%22" . $item[6] . "%22,";
         $strJson .= "%22coordx%22:%22" . str_replace(',','.',$item[0]) . "%22,";
