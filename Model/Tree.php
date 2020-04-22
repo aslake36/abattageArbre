@@ -6,9 +6,9 @@ namespace master;
 
 class Tree
 {
-    private float $coordX;
-    private float $coordY;
-    private string $typeOfNeed;
+    private float $coordx;
+    private float $coordy;
+    private string $type;
 
     /**
      * Tree constructor.
@@ -16,11 +16,11 @@ class Tree
      * @param float $coordY
      * @param string $typeOfNeed
      */
-    public function __construct(float $coordX, float $coordY, string $typeOfNeed)
+    public function __construct(float $coordx, float $coordy, string $typeOfNeed)
     {
-        $this->coordX = $coordX;
-        $this->coordY = $coordY;
-        $this->typeOfNeed = $typeOfNeed;
+        $this->coordx = $coordx;
+        $this->coordy = $coordy;
+        $this->type = $typeOfNeed;
     }
 
     public function get_object_as_array() {
@@ -30,25 +30,25 @@ class Tree
     /**
      * @return float
      */
-    public function getCoordX(): float
+    public function getCoordx(): float
     {
-        return $this->coordX;
+        return $this->coordx;
     }
 
     /**
      * @return float
      */
-    public function getCoordY(): float
+    public function getCoordy(): float
     {
-        return $this->coordY;
+        return $this->coordy;
     }
 
     /**
      * @return string
      */
-    public function getTypeOfNeed(): string
+    public function getType(): string
     {
-        return $this->typeOfNeed;
+        return $this->type;
     }
 
 

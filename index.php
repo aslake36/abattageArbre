@@ -17,6 +17,6 @@ if (isset($_GET['action'])) {
             break;
     }
 } else {
-    unset($_POST);
+    unset($_POST, $_FILES);
     home();
 }

@@ -7,7 +7,10 @@ $title="Home";
     <br>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Convertissez votre fichier .csv vers lien en .json</h4>
+            <h4 class="card-title">Convertissez votre fichier .csv vers lien golux</h4>
+            <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger">Ce n'est pas le bon format de fichier ! Veuillez soummetre un fichier .CSV</div>
+            <?php endif; ?>
             <form method="POST" action="index.php?action=toJson" enctype="multipart/form-data">
                 <label for="file" class="form-text text-muted" > Choissiez votre fichier .csv :</label>
                 <input type="file" class="form-control" name="file" id="file" required>

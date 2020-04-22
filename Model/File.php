@@ -30,22 +30,25 @@ class File
         $this->fileSize = $file['size'];
         $this->fileType = $file['type'];
         $this->extension = substr($this->fileName, -3);
-        $this->init();
     }
 
-    private function init()
+    /**
+     * @return string
+     */
+    public function getUploadedFilePath(): string
     {
-        try {
-            $this->isCsv($this->extension);
-            $this->uploadFile();
-            $this->getApplicants($this->uploadedFilePath);
-            $this->getTrees($this->uploadedFilePath, $this->applicants);
-        } catch (FileErrorException $e) {
-            $_GET['error'] = $e->getMessage();
-        }
+        return $this->uploadedFilePath;
     }
 
-    private function isCsv(string $extension)
+    /**
+     * @return false|string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
+    }
+
+    public function isCsv(string $extension)
     {
         if ($extension != 'csv'){
             throw new FileErrorException('Erreur du format du fichier');
@@ -53,7 +56,7 @@ class File
     }
 
 
-    private function uploadFile()
+    public function uploadFile()
     {
         $uploadFileDir = 'Uploaded_file/';
         $dest_path = $uploadFileDir . basename($this->fileName);
@@ -68,7 +71,7 @@ class File
         }
     }
 
-    public function getApplicants($filePath)
+    public function extractApplicants($filePath)
     {
         if (($handel = fopen($filePath, "r")) !== FALSE){
             fgetcsv($handel); //To skip first line.
@@ -95,9 +98,8 @@ class File
         }
     }
 
-    private function getTrees($filePath, array $applicants)
+    public function getTrees($filePath, array $applicants)
     {
-        $trees = [];
         if (($handel = fopen($filePath, "r")) !== FALSE){
             fgetcsv($handel); //To skip first line.
             while (($data = fgetcsv($handel, 100000, ';')) !== FALSE)
@@ -182,4 +184,13 @@ class File
             throw new FileErrorException('Problème avec le fichier depuis le serveur, veuillez contacter le support.');
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getApplicants(): array
+    {
+        return $this->applicants;
+    }
+
 }
