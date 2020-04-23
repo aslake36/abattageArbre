@@ -1,6 +1,5 @@
 <?php
 require_once 'Model/File.php';
-require_once "Model/upload.php";
 require_once "Model/FileErrorException.php";
 
 use master\File;
