@@ -12,8 +12,8 @@ class Tree
 
     /**
      * Tree constructor.
-     * @param float $coordX
-     * @param float $coordY
+     * @param float $coordx
+     * @param float $coordy
      * @param string $typeOfNeed
      */
     public function __construct(float $coordx, float $coordy, string $typeOfNeed)
@@ -23,9 +23,6 @@ class Tree
         $this->type = $typeOfNeed;
     }
 
-    public function get_object_as_array() {
-        return get_object_vars($this);
-    }
 
     /**
      * @return float
@@ -51,5 +48,11 @@ class Tree
         return $this->type;
     }
 
+    /**
+     * @return array -> Object converted into array
+     */
+    public function get_object_as_array() {
+        return get_object_vars($this);
+    }
 
 }

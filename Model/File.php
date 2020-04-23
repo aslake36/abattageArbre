@@ -22,6 +22,10 @@ class File
     private string $fileType;
     private string $extension;
 
+    /**
+     * File constructor.
+     * @param array $file -> Uploaded file by the user
+     */
     public function __construct(array $file)
     {
         $this->file = $file;
@@ -48,6 +52,19 @@ class File
         return $this->extension;
     }
 
+    /**
+     * @return array
+     */
+    public function getApplicants(): array
+    {
+        return $this->applicants;
+    }
+
+    /**
+     * This will check if file is CSV
+     * @param string $extension -> Extension of the file
+     * @throws \master\FileErrorException -> Error if file is other than .CSV
+     */
     public function isCsv(string $extension)
     {
         if ($extension != 'csv'){
@@ -55,7 +72,10 @@ class File
         }
     }
 
-
+    /**
+     * it will upload the file to the server
+     * @throws \master\FileErrorException -> Erro if file didn't get uploaded
+     */
     public function uploadFile()
     {
         $uploadFileDir = 'Uploaded_file/';
@@ -71,6 +91,11 @@ class File
         }
     }
 
+    /**
+     * It will etract applicants from file and create new instence of Applicant object
+     * @param $filePath -> Path to file
+     * @throws \master\FileErrorException -> Error if file can't be read
+     */
     public function extractApplicants($filePath)
     {
         if (($handel = fopen($filePath, "r")) !== FALSE){
@@ -98,6 +123,12 @@ class File
         }
     }
 
+    /**
+     * It will extract trees from the file and insert into Applicant object as Tree object
+     * @param $filePath -> Path to file
+     * @param array $applicants -> Array of Applicant object
+     * @throws \master\FileErrorException -> Error if file can't be opened
+     */
     public function getTrees($filePath, array $applicants)
     {
         if (($handel = fopen($filePath, "r")) !== FALSE){
@@ -186,11 +217,12 @@ class File
     }
 
     /**
-     * @return array
+     * It will delete the file after we used it
+     * @param $file -> Path to file
      */
-    public function getApplicants(): array
-    {
-        return $this->applicants;
+    public function deleteFile($file): void{
+        unlink($file);
     }
+
 
 }
