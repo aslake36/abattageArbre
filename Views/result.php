@@ -11,6 +11,7 @@ $copyLink = '';
     <br>
     <?php foreach ($applicants as $k => $applicant): ?>
         <?php $strJson = '' ?>
+        <?php $copyLink = '' ?>
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"><?php echo $applicant->getCivity() . ' ' . $applicant->getFirstname() . ' ' . $applicant->getName() ?></h4>
@@ -18,7 +19,7 @@ $copyLink = '';
                 <hr>
                 <?php
                     foreach ($applicant->getTrees() as $tree){
-                        $copyLink .= json_encode($tree, JSON_FORCE_OBJECT);
+                        $copyLink .= json_encode($tree, JSON_FORCE_OBJECT) . ',';
                         $strJson .= str_replace('"', "%22", json_encode($tree, JSON_FORCE_OBJECT)) . ',';
                     }
                 ?>
@@ -28,7 +29,7 @@ $copyLink = '';
                 <hr>
                 <p>Lien pour copier/coller</p>
                 <div class="alert alert-danger" id="$link<?= $k ?>">
-                    <?= $baseLink . "[" . substr($strJson, 0, -1) . "]" ?>
+                    <?= $baseLink . "[" . substr($copyLink, 0, -1) . "]" ?>
                 </div>
             </div>
         </div>
