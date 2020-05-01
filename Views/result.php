@@ -1,9 +1,9 @@
 <?php
 
 ob_start();
-$title="Resultat";
+$title="Téléchargez le/les fichier/s XML";
 
-$baseLink = "https://golux.lausanne.ch/goeland/affaire2/specialisation/t274/genereate_png_position_arbres.php?npixwidth=300&npixheight=300&symbsize=8&strjson=";
+$baseLink = "https://golux.lausanne.ch/public/genereate_png_position_arbres.php?npixwidth=300&npixheight=300&symbsize=8&strjson=";
 $strJson = '';
 $copyLink = '';
 
@@ -31,6 +31,11 @@ $copyLink = '';
                 <div class="alert alert-danger" id="$link<?= $k ?>">
                     <?= $baseLink . "[" . substr($copyLink, 0, -1) . "]" ?>
                 </div>
+                <a href="Files/Applicant_<?= $k ?>.xml" download>
+                    <button class="btn btn-danger">
+                        Télécharger fichier XML
+                    </button>
+                </a>
             </div>
         </div>
         <br>

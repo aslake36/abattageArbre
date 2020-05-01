@@ -3,8 +3,7 @@
 
 namespace master;
 
-use Cassandra\Date;
-use function Sodium\add;
+use DateTime;
 
 class Applicant
 {
@@ -19,9 +18,12 @@ class Applicant
     private string $email;
     private string $phone;
     private string $constructPermit;
+    private string $remarque;
+    private DateTime $date;
     private array $trees;
+    private string $pathToXml;
 
-    public function __construct($id, $civity, $firstname, $name, $society, $address, $city, $zipCode, $email, $phone, $constructPermit, array $trees = [])
+    public function __construct($id, $civity, $firstname, $name, $society, $address, $city, $zipCode, $email, $phone, $constructPermit, $remarque, DateTime $date, array $trees = [])
     {
         $this->id = $id;
         $this->civity = $civity;
@@ -34,6 +36,8 @@ class Applicant
         $this->email = $email;
         $this->phone = $phone;
         $this->constructPermit = $constructPermit;
+        $this->remarque = $remarque;
+        $this->date = $date;
         $this->trees = $trees;
     }
 
@@ -133,7 +137,38 @@ class Applicant
         return $this->trees;
     }
 
-    /******* SETTER ********/
+    /**
+     * @return DateTime
+     */
+    public function getDate(): DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRemarque(): string
+    {
+        return $this->remarque;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPathToXml(): string
+    {
+        return $this->pathToXml;
+    }
+
+    /**
+     * @param string $pathToXml
+     */
+    public function setPathToXml(string $pathToXml): void
+    {
+        $this->pathToXml = $pathToXml;
+    }
+
     /**
      * @param array $trees
      */

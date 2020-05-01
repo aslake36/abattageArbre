@@ -25,9 +25,16 @@ function toJson(){
         $applicants = $file->getApplicants();
         $file->getTrees($file->getUploadedFilePath(), $applicants);
         $file->deleteFile($file->getUploadedFilePath());
+        foreach ($applicants as $key => $applicant) {
+            $file->toXml($applicant, $key);
+        }
         $_GET['action'] = 'result';
         require "Views/result.php";
     }catch (FileErrorException $e){
+        $_GET['error'] = $e->getMessage();
+        $_GET['action'] = '';
+        home();
+    } catch (Exception $e) {
         $_GET['error'] = $e->getMessage();
         $_GET['action'] = '';
         home();
