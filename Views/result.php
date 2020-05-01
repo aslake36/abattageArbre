@@ -19,8 +19,13 @@ $copyLink = '';
                 <hr>
                 <?php
                     foreach ($applicant->getTrees() as $tree){
-                        $copyLink .= json_encode($tree, JSON_FORCE_OBJECT) . ',';
-                        $strJson .= str_replace('"', "%22", json_encode($tree, JSON_FORCE_OBJECT)) . ',';
+                        $json = [
+                            "coordx" => $tree['coordx'],
+                            "coordy" => $tree['coordy'],
+                            "type"   => $tree['type']
+                        ];
+                        $copyLink .= json_encode($json) . ',';
+                        $strJson .= str_replace('"', "%22", json_encode($json)) . ',';
                     }
                 ?>
                 <a href="<?= $baseLink . "[" . substr($strJson, 0, -1) . "]" ?>" class="card-link">
