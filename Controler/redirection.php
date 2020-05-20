@@ -1,9 +1,11 @@
 <?php
 require_once 'Model/File.php';
 require_once "Model/FileErrorException.php";
+require_once "Model/HTTPRequest.php";
 
 use master\File;
 use master\FileErrorException;
+use master\HTTPRequest;
 
 /**
  * It will display the home page
@@ -16,7 +18,7 @@ function home(){
 /**
  * It will handel to get links from the file and display Result or Home if error
  */
-function toJson(){
+function listingApplies(){
     $file = new File($_FILES['file']);
     try {
         $file->isCsv($file->getExtension());
@@ -39,6 +41,11 @@ function toJson(){
         $_GET['action'] = '';
         home();
     }
+}
+
+function donwloadDocx($applicant){
+    $httpRequest = new HTTPRequest();
+
 }
 
 

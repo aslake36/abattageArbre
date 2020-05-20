@@ -11,7 +11,7 @@ $title="Home";
             <?php if (isset($_GET['error'])): ?>
             <div class="alert alert-danger"><?= $_GET['error'] ?></div>
             <?php endif; ?>
-            <form method="POST" action="index.php?action=toJson" enctype="multipart/form-data">
+            <form method="POST" action="index.php?action=listingApplies" enctype="multipart/form-data">
                 <label for="file" class="form-text text-muted" > Choissiez votre fichier .csv :</label>
                 <input type="file" class="form-control" name="file" id="file" required>
                 <br>
@@ -19,6 +19,10 @@ $title="Home";
             </form>
         </div>
     </div>
+
+
+
+
 <?php
 $content = ob_get_clean();
 require "Body.php";
