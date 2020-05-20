@@ -1,11 +1,9 @@
 <?php
 require_once 'Model/File.php';
 require_once "Model/FileErrorException.php";
-require_once "Model/HTTPRequest.php";
 
 use master\File;
 use master\FileErrorException;
-use master\HTTPRequest;
 
 /**
  * It will display the home page
@@ -43,9 +41,5 @@ function listingApplies(){
     }
 }
 
-function donwloadDocx($applicant){
-    $httpRequest = new HTTPRequest();
-
-}
 
 

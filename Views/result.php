@@ -36,11 +36,21 @@ $copyLink = '';
                 $copyLink .= json_encode($json) . ',';
                 $strJson .= str_replace('"', "%22", json_encode($json)) . ',';
             }
+            $docX = file_get_contents('http://ws-print-test.lausanne.ch/wsprint-v1.6/print/post', false, stream_context_create([
+                'http' => [
+                    'method' => 'POST',
+                    'header'  => "Content-type: application/x-www-form-urlencoded",
+                    'content' => http_build_query([
+                        'application' => 'ARBRE_ABATTAGE', 'document' => 'fusionDocument', 'format' => '10', 'fluxXML' => file_get_contents('Files/Applicant_' . $k . '.xml')
+                    ])
+                ]
+            ]));
+            file_put_contents('Files/Applicant_' . $k . '.docx', $docX);
             ?>
             <tr>
                 <td>
-                    <a href="#" class="btn btn-sm btn-outline-danger" target="_blank">DOCX</a>
-                    <a href="<?= $baseLink . "[" . substr($strJson, 0, -1) . "]" ?>" class="btn btn-sm btn-outline-danger">IMAGE</a>
+                    <a href="<?= 'Files/Applicant_' . $k . '.docx' ?>" class="btn btn-sm btn-outline-danger" download>DOCX</a>
+                    <a href="<?= $baseLink . "[" . substr($strJson, 0, -1) . "]" ?>" class="btn btn-sm btn-outline-danger" target="_blank">IMAGE</a>
                 </td>
                 <td><?php echo $applicant->getName() ?></td>
                 <td><?php echo $applicant->getFirstname() ?></td>
@@ -61,16 +71,7 @@ $copyLink = '';
         </tr>
         </tfoot>
     </table>
-
     <br>
-    <?php foreach ($applicants as $k => $applicant): ?>
-        <a href="Files/Applicant_<?= $k ?>.xml" download>
-            <button class="btn btn-danger">
-                Télécharger fichier XML
-            </button>
-        </a>
-        <br>
-    <?php endforeach; ?>
 
 <?php
 $content = ob_get_clean();
